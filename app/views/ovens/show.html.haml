@@ -1,0 +1,28 @@
+%h3= @oven.name
+
+.cookie-info
+  Cookie(s) in oven:
+  - if @oven.cookies.present?
+    - @oven.cookies.each do |cookie|
+      %li= "A cookie with #{cookie.fillings || "no fillings"}"
+    - 2.times do
+      %br
+    - ready_class = (@oven.finished_cooking?) ? "" : "hidden"
+    %div{ :id => "ready_#{@oven.id}", :class => ready_class }
+      - if @oven.cookies.count > 1
+        (Your Cookies are Ready)
+      - else
+        (Your Cookie is Ready)
+      = button_to "Retrieve Cookie(s)", empty_oven_path, class: 'button tiny'
+
+    %br
+    - unless @oven.finished_cooking?
+      %div{ :id => "take_em_out_#{@oven.id}" }
+        = button_to "Take 'em out anyway", empty_oven_path, class: 'button tiny'
+
+  - else
+    None
+
+%br
+
+= link_to "Prepare Cookie", new_oven_cookies_path(@oven), class: 'button'

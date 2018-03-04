@@ -1,0 +1,23 @@
+%h3 New Cookie(s) for oven '#{@oven.name}'
+
+= form_for [@oven, @cookie] do |f|
+  .row
+    .small-8.columns
+      = f.label :fillings
+  .row
+    .small-8.columns
+      = f.text_field :fillings
+  .row
+    .small-8.columns
+      = f.label 'How many (1 - 10)'
+  .row
+    .small-8.columns
+      = f.number_field :how_many, min: 1, max: 10
+  - 2.times do
+    %br
+  .row
+    .small-8.columns
+      = f.submit 'Mix and bake', class: 'button'
+
+
+
